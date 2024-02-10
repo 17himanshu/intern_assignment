@@ -4,8 +4,14 @@ const SibApiV3Sdk = require('@getbrevo/brevo');
 const bodyParser = require("body-parser");
 const cors=require("cors")
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
+
+app.get("/",(req,res)=>{
+    var absPath = __dirname;
+    var path = absPath + "/public/index.html";
+    res.sendFile(path);
+})
 
 app.post("/api/v1", (req, res) => {
 
@@ -14,7 +20,7 @@ app.post("/api/v1", (req, res) => {
     let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
     let apiKey = apiInstance.authentications['apiKey'];
-    apiKey.apiKey = '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';
+    apiKey.apiKey = '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';
 
     let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
@@ -37,5 +43,4 @@ app.post("/api/v1", (req, res) => {
     });
 })
 
-
-app.listen(3000)
+app.listen(3001)
