@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function callApi() {
+
+            // Get input values
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+
+            // Make an HTTP request to your API endpoint
+            fetch('http://localhost:3000/api/v1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: name, email: email }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text(); // assuming the response is text
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Email sent successfully!');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <form id="subscribeForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email ID:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <input type="button" value="Submit" onclick="callApi()">
+    </form>
+</body>
+
+</html>
